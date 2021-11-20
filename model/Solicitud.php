@@ -1,20 +1,22 @@
 <?php
+require_once __DIR__ . "/../util/Property.php";
+
 class Solicitud
 {
-    public $codigo;
-    public $codigoDep;
-    public $rutPersona;
-    public $tipo;
-    public $descripcion;
-    public $estado;
+    private $codigo;
+    private $codigoDep;
+    private $rutPersona;
+    private $tipo;
+    private $descripcion;
+    private $estado;
     function __construct($codigo, $codigoDep, $rutPersona, $tipo, $descripcion, $estado)
     {
-        $this->codigo = $codigo;
-        $this->codigoDep = $codigoDep;
-        $this->rutPersona = $rutPersona;
-        $this->tipo = $tipo;
-        $this->descripcion = $descripcion;
-        $this->estado = $estado;
+        $this->codigo = new Property($codigo);
+        $this->codigoDep = new Property($codigoDep);
+        $this->rutPersona = new Property($rutPersona);
+        $this->tipo = new Property($tipo);
+        $this->descripcion = new Property($descripcion);
+        $this->estado = new Property($estado);
     }
     static function makeFromAssocRow($row)
     {
@@ -38,5 +40,53 @@ class Solicitud
     {
         $sql = "DELETE FROM solicitud WHERE `Codigo`='$codigo';";
         $resultado = mysqli_query($conn, $sql);
+    }
+    function getCodigo()
+    {
+        return $this->codigo->getValue();
+    }
+    function setCodigo($codigo)
+    {
+        $this->codigo->setValue($codigo);
+    }
+    function getCodigodep()
+    {
+        return $this->codigoDep->getValue();
+    }
+    function setCodigodep($codigoDep)
+    {
+        $this->codigoDep->setValue($codigoDep);
+    }
+    function getRutpersona()
+    {
+        return $this->rutPersona->getValue();
+    }
+    function setRutpersona($rutPersona)
+    {
+        $this->rutPersona->setValue($rutPersona);
+    }
+    function getTipo()
+    {
+        return $this->tipo->getValue();
+    }
+    function setTipo($tipo)
+    {
+        $this->tipo->setValue($tipo);
+    }
+    function getDescripcion()
+    {
+        return $this->descripcion->getValue();
+    }
+    function setDescripcion($descripcion)
+    {
+        $this->descripcion->setValue($descripcion);
+    }
+    function getEstado()
+    {
+        return $this->estado->getValue();
+    }
+    function setEstado($estado)
+    {
+        $this->estado->setValue($estado);
     }
 }

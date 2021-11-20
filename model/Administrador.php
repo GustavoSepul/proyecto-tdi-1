@@ -1,18 +1,20 @@
 <?php
+require_once __DIR__ . "/../util/Property.php";
+
 class Administrador
 {
-    public $rut;
-    public $nombre;
-    public $numero;
-    public $correo;
-    public $clave;
+    private $rut;
+    private $nombre;
+    private $numero;
+    private $correo;
+    private $clave;
     function __construct($rut, $nombre, $numero, $correo, $clave)
     {
-        $this->rut = $rut;
-        $this->nombre = $nombre;
-        $this->numero = $numero;
-        $this->correo = $correo;
-        $this->clave = $clave;
+        $this->rut = new Property($rut);
+        $this->nombre = new Property($nombre);
+        $this->numero = new Property($numero);
+        $this->correo = new Property($correo);
+        $this->clave = new Property($clave);
     }
     static function makeFromAssocRow($row)
     {
@@ -35,5 +37,45 @@ class Administrador
     {
         $sql = "DELETE FROM administrador WHERE `Rut_administrador`='$rut';";
         $resultado = mysqli_query($conn, $sql);
+    }
+    function getRut()
+    {
+        return $this->rut->getValue();
+    }
+    function setRut($rut)
+    {
+        $this->rut->setValue($rut);
+    }
+    function getNombre()
+    {
+        return $this->nombre->getValue();
+    }
+    function setNombre($nombre)
+    {
+        $this->nombre->setValue($nombre);
+    }
+    function getNumero()
+    {
+        return $this->numero->getValue();
+    }
+    function setNumero($numero)
+    {
+        $this->numero->setValue($numero);
+    }
+    function getCorreo()
+    {
+        return $this->correo->getValue();
+    }
+    function setCorreo($correo)
+    {
+        $this->correo->setValue($correo);
+    }
+    function getClave()
+    {
+        return $this->clave->getValue();
+    }
+    function setClave($clave)
+    {
+        $this->clave->setValue($clave);
     }
 }

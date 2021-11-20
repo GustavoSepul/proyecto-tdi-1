@@ -1,18 +1,20 @@
 <?php
+require_once __DIR__ . "/../util/Property.php";
+
 class Departamento
 {
-    public $codigo;
-    public $idMunicipalidad;
-    public $rutAdministrador;
-    public $nombre;
-    public $encargado;
+    private $codigo;
+    private $idMunicipalidad;
+    private $rutAdministrador;
+    private $nombre;
+    private $encargado;
     function __construct($codigo, $idMunicipalidad, $rutAdministrador, $nombre, $encargado)
     {
-        $this->codigo = $codigo;
-        $this->idMunicipalidad = $idMunicipalidad;
-        $this->rutAdministrador = $rutAdministrador;
-        $this->nombre = $nombre;
-        $this->encargado = $encargado;
+        $this->codigo = new Property($codigo);
+        $this->idMunicipalidad = new Property($idMunicipalidad);
+        $this->rutAdministrador = new Property($rutAdministrador);
+        $this->nombre = new Property($nombre);
+        $this->encargado = new Property($encargado);
     }
     static function makeFromAssocRow($row)
     {
@@ -35,5 +37,45 @@ class Departamento
     {
         $sql = "DELETE FROM departamento WHERE `Codigo_dep`='$codigo';";
         $resultado = mysqli_query($conn, $sql);
+    }
+    function getCodigo()
+    {
+        return $this->codigo->getValue();
+    }
+    function setCodigo($codigo)
+    {
+        $this->codigo->setValue($codigo);
+    }
+    function getIdmunicipalidad()
+    {
+        return $this->idMunicipalidad->getValue();
+    }
+    function setIdmunicipalidad($idMunicipalidad)
+    {
+        $this->idMunicipalidad->setValue($idMunicipalidad);
+    }
+    function getRutadministrador()
+    {
+        return $this->rutAdministrador->getValue();
+    }
+    function setRutadministrador($rutAdministrador)
+    {
+        $this->rutAdministrador->setValue($rutAdministrador);
+    }
+    function getNombre()
+    {
+        return $this->nombre->getValue();
+    }
+    function setNombre($nombre)
+    {
+        $this->nombre->setValue($nombre);
+    }
+    function getEncargado()
+    {
+        return $this->encargado->getValue();
+    }
+    function setEncargado($encargado)
+    {
+        $this->encargado->setValue($encargado);
     }
 }

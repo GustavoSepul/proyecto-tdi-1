@@ -1,16 +1,18 @@
 <?php
+require_once __DIR__ . "/../util/Property.php";
+
 class Municipalidad
 {
-    public $id;
-    public $nombre;
-    public $direccion;
-    public $numero;
+    private $id;
+    private $nombre;
+    private $direccion;
+    private $numero;
     function __construct($id, $nombre, $direccion, $numero)
     {
-        $this->id = $id;
-        $this->nombre = $nombre;
-        $this->direccion = $direccion;
-        $this->numero = $numero;
+        $this->id = new Property($id);
+        $this->nombre = new Property($nombre);
+        $this->direccion = new Property($direccion);
+        $this->numero = new Property($numero);
     }
     static function makeFromAssocRow($row)
     {
@@ -32,5 +34,37 @@ class Municipalidad
     {
         $sql = "DELETE FROM municipalidad WHERE `Id_municipalidad`='$id';";
         $resultado = mysqli_query($conn, $sql);
+    }
+    function getId()
+    {
+        return $this->id->getValue();
+    }
+    function setId($id)
+    {
+        $this->id->setValue($id);
+    }
+    function getNombre()
+    {
+        return $this->nombre->getValue();
+    }
+    function setNombre($nombre)
+    {
+        $this->nombre->setValue($nombre);
+    }
+    function getDireccion()
+    {
+        return $this->direccion->getValue();
+    }
+    function setDireccion($direccion)
+    {
+        $this->direccion->setValue($direccion);
+    }
+    function getNumero()
+    {
+        return $this->numero->getValue();
+    }
+    function setNumero($numero)
+    {
+        $this->numero->setValue($numero);
     }
 }
